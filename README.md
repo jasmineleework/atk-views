@@ -3,6 +3,6 @@ Shared client-side renderer for OKX Agent Trade Kit inline views (analysis + con
 
 ```html
 <div id="v"></div>
-<script src="https://cdn.jsdelivr.net/gh/jasmineleework/atk-views@v1.0.0/atk-views.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/jasmineleework/atk-views@7c209ed/atk-views.js"></script>
 <script>ATK.analysis(document.getElementById('v'), {...});</script>
 ```
