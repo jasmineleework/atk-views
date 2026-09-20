@@ -214,17 +214,18 @@ function radar(el,d){rcss();el.classList.add('atk');
 const card=c=>`<div class="card rc" style="gap:10px;${c.k==1?'border:1.5px solid var(--up)':''}"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><span class="row" style="gap:6px"><span style="font-size:20px;font-weight:500">${c.ccy}</span><span class="chip">${c.theme}</span></span>${vpill(c.k)}</div>
 <div class="row" style="justify-content:space-between;align-items:baseline"><span class="row" style="align-items:baseline;gap:8px"><span class="v n">${c.lastS}</span><span class="n ${cl(c.chg24)}" style="font-size:14px;font-weight:500">${sg(c.chg24)}</span></span><span class="p ${c.k==1?'u':c.k==2?'d':''}" style="font-weight:500">${c.stage}</span></div>
 <div style="font-size:13.5px;line-height:1.35;font-weight:500">${c.tag}</div>
+${c.abs?`<div class="g" style="grid-template-columns:repeat(${c.abs.length},minmax(0,1fr));gap:6px">${c.abs.map(a=>`<div style="background:var(--surface-0);border-radius:8px;padding:6px 8px;min-width:0"><div class="lbl" style="font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a[0]}</div><div class="n" style="font-size:15px;font-weight:500;white-space:nowrap">${a[1]}</div></div>`).join('')}</div>`:''}
 <div>${duo(c.px,c.oi)}<div style="margin-top:4px">${tapeRow(c.tape)}</div></div>
 ${tfGrid(c.tf)}
 <div class="g" style="grid-template-columns:1fr 1fr;gap:10px 14px">${c.meters.map(meter).join('')}</div>
 <div style="font-size:12.5px;line-height:1.4;color:var(--text-secondary)">${c.driver}</div>
-<div class="row" style="gap:6px">${c.links.map(l=>`<a class="chip" style="text-decoration:none;color:var(--bl)" href="${esc(l[1])}" target="_blank" rel="noopener" title="${esc(l[0])}">${esc(l[2])} ↗</a>`).join('')}</div></div>`;
+${c.links&&c.links.length?`<div class="row" style="gap:6px">${c.links.map(l=>`<a class="chip" style="text-decoration:none;color:var(--bl)" href="${esc(l[1])}" target="_blank" rel="noopener" title="${esc(l[0])}">${esc(l[2])} ↗</a>`).join('')}</div>`:''}</div>`;
 const lg=(c,t,b)=>`<span class="row" style="gap:4px"><i style="width:12px;height:10px;border-radius:2px;background:${c};${b?'box-shadow:inset 0 0 0 1px '+b:''}"></i>${t}</span>`;
 el.innerHTML=`<h2 style="position:absolute;left:-9999px">${esc(d.head)}</h2>
-<div class="card" style="margin-bottom:10px"><div class="lbl">Sentiment radar · ${d.scanned} alt perpetuals on OKX · as of ${d.asof}</div><div class="big">${d.head}</div><div class="sub" style="margin-bottom:8px">${d.sub}</div>
+<div class="card" style="margin-bottom:10px"><div class="lbl">Market radar · ${d.scanned} alt perpetuals on OKX · as of ${d.asof}</div><div class="big" style="margin-bottom:8px">${d.head}</div>${d.sub?`<div class="sub" style="margin-bottom:8px">${d.sub}</div>`:''}
 <div class="row sub" style="margin-bottom:2px"><span class="row" style="gap:4px"><span class="dot" style="background:var(--up)"></span>worth watching</span><span class="row" style="gap:4px"><span class="dot" style="background:var(--dn)"></span>too risky to chase</span><span class="row" style="gap:4px"><span class="dot" style="background:var(--nt)"></span>rest of the market</span><span>bubble = 24h volume</span></div>${radarMap(d.pts,d.thrX,d.thrY)}</div>
 <div class="row sub" style="margin:0 2px 8px;gap:10px"><span style="color:var(--text-primary);font-weight:500">Candidates</span><span class="row" style="gap:4px"><i style="width:12px;height:2px;background:var(--text-primary)"></i>price 48h</span><span class="row" style="gap:4px"><i style="width:12px;height:2px;background:var(--bl)"></i>open interest</span><span>hourly tape:</span>${lg('var(--up)','longs opening')}${lg('var(--ups)','shorts covering','var(--up)')}${lg('var(--dn)','shorts opening')}${lg('var(--dns)','longs closing','var(--dn)')}</div>
 <div class="g" style="grid-template-columns:repeat(auto-fit,minmax(290px,1fr));margin-bottom:10px">${d.cards.map(card).join('')}</div><div class="sub">${d.foot}</div>`}
-window.ATK={analysis,conclusion,dcdAnalysis,dcdConclusion,radarScan,radarCandidates,radarPlan,radar,version:'1.4.0'};
+window.ATK={analysis,conclusion,dcdAnalysis,dcdConclusion,radarScan,radarCandidates,radarPlan,radar,version:'1.4.1'};
 
 })();
