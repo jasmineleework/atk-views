@@ -151,7 +151,7 @@ return `<div class="card opt" style="${t.house?'border:2px solid var(--up)':''}"
 <div class="n" style="font-size:13px">${[['Strike',`${f0(p.strike)} <span class="mu">−${pct(p.distance,1)}</span>`],['Settles',`${p.expDate}, 16:00 UTC+8`],['Chance you get BTC',`<span class="${p.pEx<=.1?'up':p.pEx<=.2?'':'dn'}" style="font-weight:500">${pct(p.pEx,0)}</span>`]].map(r=>`<div style="display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-top:0.5px solid var(--border)"><span style="color:var(--text-secondary)">${r[0]}</span><span style="text-align:right">${r[1]}</span></div>`).join('')}</div>
 <div class="n" style="font-size:13px;line-height:1.6;background:var(--surface-0);border-radius:8px;padding:8px 10px"><div>BTC stays above ${f0(p.strike)} → <span style="font-weight:500">${usdt} USDT</span></div><div>BTC ends below → <span style="font-weight:500">${btc} BTC</span></div></div>
 <div style="font-size:13px;line-height:1.45;color:var(--text-secondary)"><span style="color:var(--text-primary);font-weight:500">Why · </span>${p.why}</div>
-<button data-tier="${t.key}">Subscribe ${f0(N)} USDT · ${t.name} ↗</button></div>`};
+<button data-tier="${t.key}">Subscribe ${t.name.toLowerCase()} ↗</button></div>`};
 const S=d.shelf,tierBg={conservative:'var(--ups)',balanced:'rgba(42,120,214,.16)',aggressive:'rgba(237,161,0,.2)',avoid:'var(--surface-0)'};
 el.innerHTML=`<h2 style="position:absolute;left:-9999px">Recommendation: ${d.head}. ${d.tiers.filter(t=>t.pick&&!t.same).map(t=>`${t.name}: ${t.pick.productId} at ${pct(t.pick.apy,1)} a year, ${pct(t.pick.pEx,0)} chance of ending up with BTC`).join('; ')}.</h2>
 <div class="card" style="margin-bottom:10px"><div class="row" style="justify-content:space-between"><span class="lbl">Our read</span><span class="sub n">as of ${d.asof}</span></div><div style="font-size:18px;font-weight:500;line-height:1.3;margin:4px 0 6px">${d.head}</div>${d.points.map(e=>`<div class="ev" style="font-size:13.5px"><span class="dot" style="background:${dotc(e[2])}"></span><span><span style="font-weight:500">${e[0]} · </span>${e[1]}</span></div>`).join('')}</div>
@@ -160,7 +160,7 @@ el.innerHTML=`<h2 style="position:absolute;left:-9999px">Recommendation: ${d.hea
 <div class="lbl" style="margin:0 0 6px 2px">Our picks by risk profile · ${f0(N)} USDT · nothing is placed until you confirm</div>
 <div class="g" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:10px">${d.tiers.map(card).join('')}</div>
 <div class="sub">${d.foot}</div>`;
-el.querySelectorAll('button[data-tier]').forEach(b=>{const t=d.tiers.find(x=>x.key==b.dataset.tier);b.onclick=()=>window.sendPrompt&&sendPrompt(`Put ${f0(N)} USDT into the ${t.name.toLowerCase()} pick from your report (${t.pick.productId}).`)})}
+el.querySelectorAll('button[data-tier]').forEach(b=>{const t=d.tiers.find(x=>x.key==b.dataset.tier);b.onclick=()=>window.sendPrompt&&sendPrompt(`Subscribe the ${t.name.toLowerCase()} pick.`)})}
 /* ---------- sentiment radar (scenario 3) ---------- */
 const RCSS=`.atk .rc{display:flex;flex-direction:column;gap:9px}.atk .rc h4{margin:0;font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
 .atk .fl{display:flex;gap:8px;font-size:12.5px;line-height:1.4;color:var(--text-secondary)}.atk .fl .dot{margin-top:5px;flex:none}
